@@ -19,7 +19,7 @@ const Status = {
   FAIL: "fail",
 };
 
-const statusTask = {
+const STATUSTASK = {
   TODO: "TODO",
   READY: "READY",
   INPROGRESS: "IN PROGRESS",
@@ -57,7 +57,7 @@ module.exports = {
   HttpCode,
   Status,
   Message,
-  statusTask,
+  STATUSTASK,
   createResponse,
   ApiLimiter,
 };

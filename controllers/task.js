@@ -10,7 +10,7 @@ const getAll = async (req, res, next) => {
   try {
     const userId = req.user.id;
     const { docs: task, ...rest } = await listTask(userId, req.query);
-    res.json({ status: "success", code: 200, data: { task } });
+    res.json({ status: "success", code: 200, data: { task, ...rest } });
   } catch (e) {
     next(e);
   }

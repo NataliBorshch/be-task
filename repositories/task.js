@@ -1,32 +1,33 @@
 const Task = require("../model/schemaTask");
 
-const listTask = async () => {
-  const result = await Task.find();
+const getTaskById = async (userId, idTask) => {
+  const result = await Task.findOne({ id: idTask, owner: userId });
   return result;
 };
 
-const getTaskById = async (id) => {
-  const result = await Task.findById(id);
-  return result;
-};
-
-const removeTask = async (id) => {
+const removeTask = async (userId, id) => {
   const result = await Task.findByIdAndDelete(id);
   return result;
 };
 
-const createTask = async (body) => {
-  const result = await Task.create({ ...body });
+//work
+
+const createTask = async (userId, body) => {
+  const result = await Task.create({ ...body, owner: userId });
   return result;
 };
 
-const updateTask = async (id, body) => {
-  const result = await Task.findByIdAndUpdate(id, { ...body }, { new: true });
+const updateTask = async (userId, id, body) => {
+  const result = await Task.findOneAndUpdate(
+    { id, owner: userId },
+    { ...body },
+    { new: true }
+  );
   return result;
 };
 
 module.exports = {
-  listTask,
+  // listTask,
   getTaskById,
   removeTask,
   createTask,

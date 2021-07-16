@@ -14,7 +14,7 @@ router.use((req, res, next) => {
   console.log(req.url);
   next();
 });
-router.get("/", guard, getAll).post("/", guard, create);
+router.get("/", guard, getAll).post("/", guard, validationCreateTask, create);
 router
   .get("/:id", guard, getById)
   .delete("/:id", guard, remove)
