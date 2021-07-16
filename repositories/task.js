@@ -1,12 +1,22 @@
 const Task = require("../model/schemaTask");
 
-const getTaskById = async (userId, idTask) => {
-  const result = await Task.findOne({ id: idTask, owner: userId });
+// done
+
+const listTask = async (userId) => {
+  const result = await Task.find({ owner: userId });
   return result;
 };
 
-const removeTask = async (userId, id) => {
-  const result = await Task.findByIdAndDelete(id);
+//done
+
+const getTaskById = async (userId, idTask) => {
+  const result = await Task.findOne({ _id: idTask, owner: userId });
+  return result;
+};
+
+//done
+const removeTask = async (userId, idTask) => {
+  const result = await Task.findByIdAndDelete({ _id: idTask, owner: userId });
   return result;
 };
 
@@ -17,9 +27,11 @@ const createTask = async (userId, body) => {
   return result;
 };
 
-const updateTask = async (userId, id, body) => {
+//done
+
+const updateTask = async (userId, idTask, body) => {
   const result = await Task.findOneAndUpdate(
-    { id, owner: userId },
+    { _id: idTask, owner: userId },
     { ...body },
     { new: true }
   );
@@ -27,7 +39,7 @@ const updateTask = async (userId, id, body) => {
 };
 
 module.exports = {
-  // listTask,
+  listTask,
   getTaskById,
   removeTask,
   createTask,

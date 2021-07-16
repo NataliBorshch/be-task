@@ -16,6 +16,8 @@ const getAll = async (req, res, next) => {
   }
 };
 
+//done
+
 const create = async (req, res, next) => {
   try {
     const userId = req.user.id;
@@ -30,7 +32,8 @@ const create = async (req, res, next) => {
 
 const getById = async (req, res, next) => {
   try {
-    const task = await getTaskById(req.params.id);
+    const userId = req.user.id;
+    const task = await getTaskById(userId, req.params.id);
     return task
       ? res.json({ status: "success", code: 200, data: { task } })
       : res.json({ status: "error ", code: 404, message: "Not Found" });
@@ -39,9 +42,12 @@ const getById = async (req, res, next) => {
   }
 };
 
+//done
+
 const remove = async (req, res, next) => {
   try {
-    const task = await removeTask(req.params.id);
+    const userId = req.user.id;
+    const task = await removeTask(userId, req.params.id);
     return task
       ? res.json({ status: "contact deleted", code: 200, data: { task } })
       : res.json({ status: "error ", code: 404, message: "Not Found" });
@@ -53,7 +59,8 @@ const remove = async (req, res, next) => {
 const update = async (req, res, next) => {
   try {
     if (Object.keys(req.body).length !== 0) {
-      const task = await updateTask(req.params.id, req.body);
+      const userId = req.user.id;
+      const task = await updateTask(userId, req.params.id, req.body);
       return task
         ? res.json({ status: "success", code: 200, data: { task } })
         : res.json({ status: "error", code: 404, message: "Not Found" });
