@@ -9,7 +9,7 @@ const taskSchema = new Schema(
       minlength: 1,
       required: [true, "Set name for contact"],
     },
-    date_target: [String],
+    date_target: String,
     description: {
       type: String,
     },
