@@ -9,8 +9,8 @@ const {
 const getAll = async (req, res, next) => {
   try {
     const userId = req.user.id;
-    const { docs: task, ...rest } = await listTask(userId, req.query);
-    res.json({ status: "success", code: 200, data: { task, ...rest } });
+    const task = await listTask(userId);
+    res.json({ status: "success", code: 200, data: task });
   } catch (e) {
     next(e);
   }
