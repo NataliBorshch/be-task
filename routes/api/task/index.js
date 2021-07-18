@@ -8,7 +8,11 @@ const {
   update,
   remove,
 } = require("../../../controllers/task");
-const { validationCreateTask, validationUpdateTask } = require("./validation");
+const {
+  validationCreateTask,
+  validationUpdateTask,
+  validationUpdateReject,
+} = require("./validation");
 
 router.use((req, res, next) => {
   console.log(req.url);
@@ -19,5 +23,7 @@ router
   .get("/:id", guard, getById)
   .delete("/:id", guard, remove)
   .put("/:id", guard, validationUpdateTask, update);
+
+router.patch("/:id/reject", guard, validationUpdateReject, update);
 
 module.exports = router;

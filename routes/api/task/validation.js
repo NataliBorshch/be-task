@@ -5,6 +5,7 @@ const schemaCreateTask = Joi.object({
   date_target: Joi.string(),
   description: Joi.string().required(),
   status: Joi.string(),
+  reject: Joi.boolean(),
   priority: Joi.boolean(),
   owner: Joi.object(),
 });
@@ -15,8 +16,13 @@ const schemaUpdateTask = Joi.object({
   description: Joi.string().required(),
   status: Joi.string(),
   priority: Joi.boolean(),
+  reject: Joi.boolean(),
   owner: Joi.object(),
 }).min(1);
+
+const schemaUpdateTaskReject = Joi.object({
+  reject: Joi.boolean(),
+}).or("reject");
 
 const validate = async (schema, obj, next) => {
   try {
@@ -36,5 +42,8 @@ module.exports = {
   },
   validationUpdateTask: (req, res, next) => {
     return validate(schemaUpdateTask, req.body, next);
+  },
+  validationUpdateReject: (req, res, next) => {
+    return validate(schemaUpdateTaskReject, req.body, next);
   },
 };
