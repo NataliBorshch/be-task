@@ -14,8 +14,8 @@
 
 **Task info**
 
-1. get all task get.(/)
-2. get task by id get.(/:id)
-3. remove task delete.(/:id)
-4. update task put.(/:id)
-5. update reject patch.(/:id/reject)
+1. get all task get.(/task)
+2. get task by id get.(/task/:id)
+3. remove task delete.(/task/:id)
+4. update task put.(/task/:id)
+5. update reject patch.(/task/:id/reject)
