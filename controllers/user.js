@@ -27,6 +27,7 @@ const register = async (req, res, next) => {
     const { id, name, email, avatar } = await User.create(req.body);
     const payload = { id };
     const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "12h" });
+    await User.updateToket(id, token);
     res.status(HttpCode.CREATER).json(
       createResponse(Status.SUCCESS, HttpCode.CREATER, {
         data: { id, name, email, avatar, token },
