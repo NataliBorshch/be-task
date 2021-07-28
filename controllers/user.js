@@ -1,7 +1,7 @@
 const fs = require("fs/promises");
 const path = require("path");
 const User = require("../repositories/user");
-const UploadAvatar = require("../service/local-upload");
+
 const {
   Status,
   HttpCode,
@@ -12,7 +12,6 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const SECRET_KEY = process.env.SECRET_KEY;
-const AVATAR_OF_USERS = process.env.AVATAR_OF_USERS;
 
 const register = async (req, res, next) => {
   try {
@@ -91,34 +90,9 @@ const current = async (req, res, next) => {
   }
 };
 
-const avatars = async (req, res, next) => {
-  try {
-    const id = req.user.id;
-    const upload = new UploadAvatar(AVATAR_OF_USERS);
-    const urlAvatar = await upload.saveAvatar({
-      idUser: id,
-      file: req.file,
-    });
-    try {
-      fs.unlink(path.join(AVATAR_OF_USERS, req.user.avatar));
-    } catch (error) {
-      console.log(error.message);
-    }
-    await User.updateAvatar(id, urlAvatar);
-    return res
-      .status(HttpCode.OK)
-      .json(
-        createResponse(Status.SUCCESS, HttpCode.OK, { data: { urlAvatar } })
-      );
-  } catch (error) {
-    next(error);
-  }
-};
-
 module.exports = {
   register,
   login,
   logout,
   current,
-  avatars,
 };

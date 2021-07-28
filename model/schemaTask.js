@@ -1,6 +1,5 @@
 const { Schema, model, SchemaTypes } = require("mongoose");
 const { STATUSTASK } = require("../helpers/task");
-// const mongoosePaginate = require("mongoose-paginate-v2");
 
 const taskSchema = new Schema(
   {
@@ -51,8 +50,6 @@ const taskSchema = new Schema(
     },
   }
 );
-
-// taskSchema.plugin(mongoosePaginate);
 
 const Task = model("task", taskSchema);
 

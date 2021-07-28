@@ -17,18 +17,9 @@ const updateToket = async (id, token) => {
   return await User.updateOne({ _id: id }, { token });
 };
 
-const updateAvatar = async (userId, file, cloudAvatar = null) => {
-  const result = await User.updateOne(
-    { _id: userId },
-    { avatar: file, cloudAvatar }
-  );
-  return result;
-};
-
 module.exports = {
   findByID,
   findByEmail,
   create,
   updateToket,
-  updateAvatar,
 };

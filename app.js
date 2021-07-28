@@ -12,11 +12,9 @@ const {
 } = require("./helpers/task");
 const path = require("path");
 require("dotenv").config();
-const AVATAR_OF_USERS = process.env.AVATAR_OF_USERS;
 
 const app = express();
 app.use(helmet());
-app.use(express.static(path.join(__dirname, AVATAR_OF_USERS)));
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
