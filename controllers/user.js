@@ -39,7 +39,8 @@ const register = async (req, res, next) => {
 const login = async (req, res, next) => {
   try {
     const user = await User.findByEmail(req.body.email);
-    const isValidPass = await user?.isValidPassword(req.body.password);
+    // const isValidPass = await user?.isValidPassword(req.body.password);
+    const isValidPass = await (user && user.isValidPassword(req.body.password));
     if (!user || !isValidPass) {
       return res.status(HttpCode.UNAUTHORIZED).json(
         createResponse(Status.ERROR, HttpCode.UNAUTHORIZED, {
